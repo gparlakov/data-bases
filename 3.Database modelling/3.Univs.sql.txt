@@ -1,77 +1,76 @@
 USE [master]
 GO
-/****** Object:  Database [Univs]    Script Date: 7/9/2013 5:57:00 PM ******/
-CREATE DATABASE [Univs]
-GO
-ALTER DATABASE [Univs] SET COMPATIBILITY_LEVEL = 110
+/****** Object:  Database [Univeristies]    Script Date: 7/9/2013 6:23:30 PM ******/
+CREATE DATABASE [Univeristies]
+ 
+ALTER DATABASE [Univeristies] SET COMPATIBILITY_LEVEL = 110
 GO
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
 begin
-EXEC [Univs].[dbo].[sp_fulltext_database] @action = 'enable'
+EXEC [Univeristies].[dbo].[sp_fulltext_database] @action = 'enable'
 end
 GO
-
-ALTER DATABASE [Univs] SET ANSI_NULL_DEFAULT OFF 
+ALTER DATABASE [Univeristies] SET ANSI_NULL_DEFAULT OFF 
 GO
-ALTER DATABASE [Univs] SET ANSI_NULLS OFF 
+ALTER DATABASE [Univeristies] SET ANSI_NULLS OFF 
 GO
-ALTER DATABASE [Univs] SET ANSI_PADDING OFF 
+ALTER DATABASE [Univeristies] SET ANSI_PADDING OFF 
 GO
-ALTER DATABASE [Univs] SET ANSI_WARNINGS OFF 
+ALTER DATABASE [Univeristies] SET ANSI_WARNINGS OFF 
 GO
-ALTER DATABASE [Univs] SET ARITHABORT OFF 
+ALTER DATABASE [Univeristies] SET ARITHABORT OFF 
 GO
-ALTER DATABASE [Univs] SET AUTO_CLOSE OFF 
+ALTER DATABASE [Univeristies] SET AUTO_CLOSE OFF 
 GO
-ALTER DATABASE [Univs] SET AUTO_CREATE_STATISTICS ON 
+ALTER DATABASE [Univeristies] SET AUTO_CREATE_STATISTICS ON 
 GO
-ALTER DATABASE [Univs] SET AUTO_SHRINK OFF 
+ALTER DATABASE [Univeristies] SET AUTO_SHRINK OFF 
 GO
-ALTER DATABASE [Univs] SET AUTO_UPDATE_STATISTICS ON 
+ALTER DATABASE [Univeristies] SET AUTO_UPDATE_STATISTICS ON 
 GO
-ALTER DATABASE [Univs] SET CURSOR_CLOSE_ON_COMMIT OFF 
+ALTER DATABASE [Univeristies] SET CURSOR_CLOSE_ON_COMMIT OFF 
 GO
-ALTER DATABASE [Univs] SET CURSOR_DEFAULT  GLOBAL 
+ALTER DATABASE [Univeristies] SET CURSOR_DEFAULT  GLOBAL 
 GO
-ALTER DATABASE [Univs] SET CONCAT_NULL_YIELDS_NULL OFF 
+ALTER DATABASE [Univeristies] SET CONCAT_NULL_YIELDS_NULL OFF 
 GO
-ALTER DATABASE [Univs] SET NUMERIC_ROUNDABORT OFF 
+ALTER DATABASE [Univeristies] SET NUMERIC_ROUNDABORT OFF 
 GO
-ALTER DATABASE [Univs] SET QUOTED_IDENTIFIER OFF 
+ALTER DATABASE [Univeristies] SET QUOTED_IDENTIFIER OFF 
 GO
-ALTER DATABASE [Univs] SET RECURSIVE_TRIGGERS OFF 
+ALTER DATABASE [Univeristies] SET RECURSIVE_TRIGGERS OFF 
 GO
-ALTER DATABASE [Univs] SET  DISABLE_BROKER 
+ALTER DATABASE [Univeristies] SET  DISABLE_BROKER 
 GO
-ALTER DATABASE [Univs] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+ALTER DATABASE [Univeristies] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
 GO
-ALTER DATABASE [Univs] SET DATE_CORRELATION_OPTIMIZATION OFF 
+ALTER DATABASE [Univeristies] SET DATE_CORRELATION_OPTIMIZATION OFF 
 GO
-ALTER DATABASE [Univs] SET TRUSTWORTHY OFF 
+ALTER DATABASE [Univeristies] SET TRUSTWORTHY OFF 
 GO
-ALTER DATABASE [Univs] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+ALTER DATABASE [Univeristies] SET ALLOW_SNAPSHOT_ISOLATION OFF 
 GO
-ALTER DATABASE [Univs] SET PARAMETERIZATION SIMPLE 
+ALTER DATABASE [Univeristies] SET PARAMETERIZATION SIMPLE 
 GO
-ALTER DATABASE [Univs] SET READ_COMMITTED_SNAPSHOT OFF 
+ALTER DATABASE [Univeristies] SET READ_COMMITTED_SNAPSHOT OFF 
 GO
-ALTER DATABASE [Univs] SET HONOR_BROKER_PRIORITY OFF 
+ALTER DATABASE [Univeristies] SET HONOR_BROKER_PRIORITY OFF 
 GO
-ALTER DATABASE [Univs] SET RECOVERY SIMPLE 
+ALTER DATABASE [Univeristies] SET RECOVERY SIMPLE 
 GO
-ALTER DATABASE [Univs] SET  MULTI_USER 
+ALTER DATABASE [Univeristies] SET  MULTI_USER 
 GO
-ALTER DATABASE [Univs] SET PAGE_VERIFY CHECKSUM  
+ALTER DATABASE [Univeristies] SET PAGE_VERIFY CHECKSUM  
 GO
-ALTER DATABASE [Univs] SET DB_CHAINING OFF 
+ALTER DATABASE [Univeristies] SET DB_CHAINING OFF 
 GO
-ALTER DATABASE [Univs] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+ALTER DATABASE [Univeristies] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
 GO
-ALTER DATABASE [Univs] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+ALTER DATABASE [Univeristies] SET TARGET_RECOVERY_TIME = 0 SECONDS 
 GO
-USE [Univs]
+USE [Univeristies]
 GO
-/****** Object:  Table [dbo].[Courses]    Script Date: 7/9/2013 5:57:00 PM ******/
+/****** Object:  Table [dbo].[Courses]    Script Date: 7/9/2013 6:23:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -80,6 +79,7 @@ CREATE TABLE [dbo].[Courses](
 	[Id] [int] NOT NULL,
 	[Name] [nvarchar](50) NOT NULL,
 	[ProfesorId] [int] NOT NULL,
+	[DepartmentId] [int] NOT NULL,
  CONSTRAINT [PK_Courses] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -87,7 +87,7 @@ CREATE TABLE [dbo].[Courses](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Departments]    Script Date: 7/9/2013 5:57:00 PM ******/
+/****** Object:  Table [dbo].[Departments]    Script Date: 7/9/2013 6:23:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -103,7 +103,18 @@ CREATE TABLE [dbo].[Departments](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Faculties]    Script Date: 7/9/2013 5:57:00 PM ******/
+/****** Object:  Table [dbo].[DepartmentsAndCourses]    Script Date: 7/9/2013 6:23:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DepartmentsAndCourses](
+	[DepartmentId] [int] NOT NULL,
+	[CourseId] [int] NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Faculties]    Script Date: 7/9/2013 6:23:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -119,7 +130,18 @@ CREATE TABLE [dbo].[Faculties](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Professors]    Script Date: 7/9/2013 5:57:00 PM ******/
+/****** Object:  Table [dbo].[PriofessorsAndCourses]    Script Date: 7/9/2013 6:23:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PriofessorsAndCourses](
+	[ProfessorId] [int] NOT NULL,
+	[CourseId] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Professors]    Script Date: 7/9/2013 6:23:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -135,7 +157,7 @@ CREATE TABLE [dbo].[Professors](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ProfessorsAndTitles]    Script Date: 7/9/2013 5:57:00 PM ******/
+/****** Object:  Table [dbo].[ProfessorsAndTitles]    Script Date: 7/9/2013 6:23:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -146,7 +168,7 @@ CREATE TABLE [dbo].[ProfessorsAndTitles](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Students]    Script Date: 7/9/2013 5:57:00 PM ******/
+/****** Object:  Table [dbo].[Students]    Script Date: 7/9/2013 6:23:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -162,7 +184,7 @@ CREATE TABLE [dbo].[Students](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[StudentsAndCourses]    Script Date: 7/9/2013 5:57:00 PM ******/
+/****** Object:  Table [dbo].[StudentsAndCourses]    Script Date: 7/9/2013 6:23:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -173,7 +195,7 @@ CREATE TABLE [dbo].[StudentsAndCourses](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Titles]    Script Date: 7/9/2013 5:57:00 PM ******/
+/****** Object:  Table [dbo].[Titles]    Script Date: 7/9/2013 6:23:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -188,7 +210,7 @@ CREATE TABLE [dbo].[Titles](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Unversities]    Script Date: 7/9/2013 5:57:00 PM ******/
+/****** Object:  Table [dbo].[Unversities]    Script Date: 7/9/2013 6:23:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -274,10 +296,10 @@ INSERT [dbo].[Unversities] ([Id], [Name]) VALUES (2, N'MEI')
 GO
 SET IDENTITY_INSERT [dbo].[Unversities] OFF
 GO
-ALTER TABLE [dbo].[Courses]  WITH CHECK ADD  CONSTRAINT [FK_Courses_Professors] FOREIGN KEY([ProfesorId])
-REFERENCES [dbo].[Professors] ([Id])
+ALTER TABLE [dbo].[Courses]  WITH CHECK ADD  CONSTRAINT [FK_Courses_Departments] FOREIGN KEY([DepartmentId])
+REFERENCES [dbo].[Departments] ([Id])
 GO
-ALTER TABLE [dbo].[Courses] CHECK CONSTRAINT [FK_Courses_Professors]
+ALTER TABLE [dbo].[Courses] CHECK CONSTRAINT [FK_Courses_Departments]
 GO
 ALTER TABLE [dbo].[Departments]  WITH CHECK ADD  CONSTRAINT [FK_Departments_Faculties] FOREIGN KEY([FacultyId])
 REFERENCES [dbo].[Faculties] ([Id])
@@ -288,6 +310,16 @@ ALTER TABLE [dbo].[Faculties]  WITH CHECK ADD  CONSTRAINT [FK_Faculties_Unversit
 REFERENCES [dbo].[Unversities] ([Id])
 GO
 ALTER TABLE [dbo].[Faculties] CHECK CONSTRAINT [FK_Faculties_Unversities]
+GO
+ALTER TABLE [dbo].[PriofessorsAndCourses]  WITH CHECK ADD  CONSTRAINT [FK_PriofessorsAndCourses_Courses] FOREIGN KEY([CourseId])
+REFERENCES [dbo].[Courses] ([Id])
+GO
+ALTER TABLE [dbo].[PriofessorsAndCourses] CHECK CONSTRAINT [FK_PriofessorsAndCourses_Courses]
+GO
+ALTER TABLE [dbo].[PriofessorsAndCourses]  WITH CHECK ADD  CONSTRAINT [FK_PriofessorsAndCourses_Professors] FOREIGN KEY([ProfessorId])
+REFERENCES [dbo].[Professors] ([Id])
+GO
+ALTER TABLE [dbo].[PriofessorsAndCourses] CHECK CONSTRAINT [FK_PriofessorsAndCourses_Professors]
 GO
 ALTER TABLE [dbo].[Professors]  WITH CHECK ADD  CONSTRAINT [FK_Professors_Departments1] FOREIGN KEY([DepartmentId])
 REFERENCES [dbo].[Departments] ([Id])
@@ -321,5 +353,5 @@ ALTER TABLE [dbo].[StudentsAndCourses] CHECK CONSTRAINT [FK_StudentsAndCourses_S
 GO
 USE [master]
 GO
-ALTER DATABASE [Univs] SET  READ_WRITE 
+ALTER DATABASE [Univeristies] SET  READ_WRITE 
 GO
