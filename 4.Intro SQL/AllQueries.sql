@@ -71,7 +71,7 @@ SELECT e.[EmployeeID]
 
 -- 11 Write a SQL query to find the names of all employees whose first name starts with "SA".
 
-SELECT e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name] 
+SELECT e.[FirstName] + ' ' + e.[LastName]	as [Full Name] 
   FROM [TelerikAcademy].[dbo].[Employees] as e
 	WHERE FirstName LIKE 'Sa%'
 /*----------------------------------------------*/	
@@ -80,7 +80,7 @@ SELECT e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name]
 	
 --12 Write a SQL query to find the names of all employees whose last name contains "ei".
 
-SELECT e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name] 
+SELECT e.[FirstName] + ' ' + e.[LastName]	as [Full Name] 
   FROM [TelerikAcademy].[dbo].[Employees] as e
 	WHERE LastName LIKE '%ei%'
 /*----------------------------------------------*/	
@@ -89,7 +89,7 @@ SELECT e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name]
 
 -- 13 Write a SQL query to find the salary of all employees whose salary is in the range [20000…30000].
 
-SELECT e.[Salary], e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name] 
+SELECT e.[Salary], e.[FirstName] + ' ' + e.[LastName]	as [Full Name] 
   FROM [TelerikAcademy].[dbo].[Employees] as e
 	WHERE Salary BETWEEN 20000 AND 30000
 		ORDER BY e.Salary, e.FirstName, e.LastName
@@ -98,7 +98,7 @@ SELECT e.[Salary], e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [
 								
 -- 14 Write a SQL query to find the names of all employees whose salary is 25000, 14000, 12500 or 23600.
 
-SELECT e.[Salary], e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name] 
+SELECT e.[Salary], e.[FirstName] + ' ' + e.[LastName]	as [Full Name] 
   FROM [TelerikAcademy].[dbo].[Employees] as e
 	WHERE Salary IN (25000, 14000, 12500, 23600)
 		ORDER BY e.Salary, e.FirstName, e.LastName
@@ -106,7 +106,7 @@ SELECT e.[Salary], e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [
 		
 -- 15 Write a SQL query to find all employees that do not have manager.
 
-SELECT e.[ManagerID], e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName] as [Full Name] 
+SELECT e.[ManagerID], e.[FirstName] + ' ' + e.[LastName] as [Full Name] 
   FROM [TelerikAcademy].[dbo].[Employees] as e
 	WHERE e.[ManagerID] IS NULL
 /*----------------------------------------------*/	
@@ -114,7 +114,7 @@ SELECT e.[ManagerID], e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName] a
 	
 --16 Write a SQL query to find all employees that have salary more than 50000. Order them in decreasing order by salary.
 
-SELECT e.[Salary], e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name] 
+SELECT e.[Salary], e.[FirstName] + ' ' + e.[LastName]	as [Full Name] 
   FROM [TelerikAcademy].[dbo].[Employees] as e
 	WHERE Salary > 50000
 		ORDER BY e.Salary desc
@@ -123,7 +123,7 @@ SELECT e.[Salary], e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [
 								
 --17 Write a SQL query to find the top 5 best paid employees.
 
-SELECT TOP 5 e.[Salary], e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name] 
+SELECT TOP 5 e.[Salary], e.[FirstName] + ' ' + e.[LastName]	as [Full Name] 
   FROM [TelerikAcademy].[dbo].[Employees] as e
 	WHERE Salary > 50000
 		ORDER BY e.Salary desc
@@ -132,7 +132,7 @@ SELECT TOP 5 e.[Salary], e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName
 
 ---18 Write a SQL query to find all employees along with their address. Use inner join with ON clause.
 
-SELECT e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name],
+SELECT e.[FirstName] + ' ' + e.[LastName]	as [Full Name],
 		t.[Name] as [Town],
 		a.[AddressText] as [Address]
   FROM [TelerikAcademy].[dbo].[Employees] as e
@@ -147,7 +147,7 @@ SELECT e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name],
 ---19 Write a SQL query to find all employees and their address. Use equijoins (conditions in the WHERE clause).
 
 /*First set the columns from which table and as name */
-SELECT e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name],
+SELECT e.[FirstName] + ' ' + e.[LastName]	as [Full Name],
 		t.Name as Town,
 		a.[AddressText] as Address
 /* Then specifiy the tables (and their aliases i.e. e === Eployees)from which to take the columns */
@@ -163,7 +163,7 @@ SELECT e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name],
 
 ---20 Write a SQL query to find all employees along with their manager.
  
- SELECT e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name],
+ SELECT e.[FirstName] + ' ' + e.[LastName]	as [Full Name],
 		m.[FirstName] + ' ' + m.[FirstName] + ' ' + m.[LastName]	as [Manager Full Name]
 
 	FROM [TelerikAcademy].[dbo].[Employees] as e 
@@ -175,7 +175,7 @@ SELECT e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name],
 
 ---21 Write a SQL query to find all employees, along with their manager and their address. Join the 3 tables: Employees e, Employees m and Addresses a.
 
-SELECT e.[FirstName] + ' ' + e.[FirstName] + ' ' + e.[LastName]	as [Full Name],
+SELECT e.[FirstName] + ' ' + e.[LastName]	as [Full Name],
 		a.AddressText as [Emplyee Address],
 		m.[FirstName] + ' ' + m.[FirstName] + ' ' + m.[LastName]	as [Manager Full Name]
 		
