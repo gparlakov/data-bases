@@ -1,48 +1,51 @@
--- 1 Write a SQL query to find the names and salaries of the employees that take the minimal salary in the company. Use a nested SELECT statement.
+-- 11 Write a SQL query to find all managers that have exactly 5 employees. Display their first name and last name.
 
-SELECT e.FirstName, e.LastName, e.Salary from Employees e
-where e.Salary IN
-(SELECT MIN(SALARY) from Employees)
+SELECT DISTINCT m.ManagerID,
+	e.FirstName + ' ' + e.LastName [Manger Name]
+FROM Employees m
+	JOIN Employees e
+		ON m.ManagerID = e.EmployeeID
+	where m.ManagerID in
+	(SELECT ManagerID FROM Employees  GROUP BY ManagerID Having Count(*) = 5)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
--- 2 Write a SQL query to find the names and salaries of the employees that have a salary that is up to 10% higher than the minimal salary for the company.
+-- 12 Write a SQL query to find all employees along with their managers. For employees that do not have manager display the value "(no manager)".
 
-SELECT e.FirstName, e.LastName, e.Salary from Employees e
-where e.Salary <=
-(SELECT MIN(SALARY) from Employees) * 1.1
+
+SELECT e.LastName as Employee,
+	 ISNULL(m.LastName, '(no manager)') as Manager
+FROM Employees e
+	LEFT JOIN Employees m
+		ON e.ManagerID = m.EmployeeID
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- 3 Write a SQL query to find the full name, salary and department of the employees that take the minimal salary in their department. Use a nested SELECT statement.
+-- 13 Write a SQL query to find the names of all employees whose last name is exactly 5 characters long. Use the built-in LEN(str) function.
 
-SELECT e.FirstName, e.LastName, e.Salary, e.DepartmentID from Employees e
-where e.Salary =
-	(SELECT MIN(SALARY) from Employees d WHERE d.DepartmentID = e.DepartmentID )
+SELECT e.LastName as Employee	 
+	FROM Employees e
+	where LEN(e.LastName) = 5
 	
-	
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
--- 4 Write a SQL query to find the average salary in the department #1.
+-- 14 Write a SQL query to display the current date and time in the following format "day.month.year hour:minutes:seconds:milliseconds". Search in  Google to find how to format dates in SQL Server.
 
-SELECT AVG(SALARY) as [Average Salary] 
-from Employees d WHERE d.DepartmentID = 1
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
--- 5 Write a SQL query to find the average salary  in the "Sales" department.
-
-SELECT AVG(SALARY) as [Average Salary in Sales] 
-from Employees d WHERE d.DepartmentID =
-(Select DepartmentID FROM Departments Where Name = 'sales')
+SELECT convert(varchar, getdate(), 113)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
--- 6 Write a SQL query to find the number of employees in the "Sales" department.
+-- 15 Write a SQL statement to create a table Users. Users should have username, password, full name and last login time. Choose appropriate data types for the table fields. Define a primary key column with a primary key constraint. Define the primary key column as identity to facilitate inserting records. Define unique constraint to avoid repeating usernames. Define a check constraint to ensure the password is at least 5 characters long.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- 16 Write a SQL query to find the number of employees in the "Sales" department.
 
 SELECT Count(EmployeeID) as [Count Employees in Sales] 
 from Employees e WHERE e.DepartmentID =
@@ -51,20 +54,20 @@ from Employees e WHERE e.DepartmentID =
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
--- 7 Write a SQL query to find the number of all employees that have manager.
+-- 17 Write a SQL query to find the number of all employees that have manager.
 
 SELECT Count(EmployeeID) [Count Employees with manager] FROM Employees 
 	WHERE ManagerID IS NOT NULL
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- 8 Write a SQL query to find the number of all employees that have no manager.
+-- 18 Write a SQL query to find the number of all employees that have no manager.
 
 SELECT Count(EmployeeID) [Count Employees without manager] FROM Employees 
 	WHERE ManagerID IS NULL
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
--- 9 Write a SQL query to find all departments and the average salary for each of them.
+-- 19 Write a SQL query to find all departments and the average salary for each of them.
 
 SELECT ROUND(AVG(e.Salary),2) as [Average Salary], 
 	d.Name as Department
@@ -77,7 +80,7 @@ ORDER BY [Average Salary]
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- 10 Write a SQL query to find the count of all employees in each department and for each town.
+-- 20 Write a SQL query to find the count of all employees in each department and for each town.
 
 SELECT COUNT(EmployeeId) as [Count Employees],
 	DepartmentID,
