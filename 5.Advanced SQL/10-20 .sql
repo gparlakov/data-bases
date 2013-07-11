@@ -41,58 +41,69 @@ SELECT convert(varchar, getdate(), 113)
 
 -- 15 Write a SQL statement to create a table Users. Users should have username, password, full name and last login time. Choose appropriate data types for the table fields. Define a primary key column with a primary key constraint. Define the primary key column as identity to facilitate inserting records. Define unique constraint to avoid repeating usernames. Define a check constraint to ensure the password is at least 5 characters long.
 
+CREATE TABLE Users(
+	Id int IDENTITY,
+	Username varchar(50) NOT NULL,
+	FullName varchar(100),
+	LastLoginDate DateTime,
+	CONSTRAINT PK_Users PRIMARY KEY(Id),
+	CONSTRAINT UC_Username UNIQUE(Username),
+	CONSTRAINT UC_UsernameMin_6 CHECK(LEN(Username) >= 6),
+)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
--- 16 Write a SQL query to find the number of employees in the "Sales" department.
+-- 16 Write a SQL statement to create a view that displays the users from the Users
+-- table that have been in the system today. Test if the view works correctly.
 
-SELECT Count(EmployeeID) as [Count Employees in Sales] 
-from Employees e WHERE e.DepartmentID =
-(Select DepartmentID FROM Departments Where Name = 'sales')
+CREATE VIEW V_UsersLoggedInToday AS
+SELECT * 
+FROM USERS 
+where (DATEDIFF(DAY, LastLoginDate, GETDATE()) < 1)
+
+--test
+
+INSERT INTO Users(Username, LastLoginDate) Values ('user123', GetDate())
+INSERT INTO Users(Username, LastLoginDate) Values ('user1231', GetDate())
+INSERT INTO Users(Username, LastLoginDate) Values ('user1232', '20051010')
+
+select * from V_UsersLoggedInToday 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- 17 Write a SQL statement to create a table Groups. Groups 
+--should have unique name (use unique constraint). Define primary key and identity column.
+
+CREATE TABLE Groups(
+	Id int IDENTITY,
+	Name varchar(40) NOT NULL,
+	CONSTRAINT PK_Id PRIMARY KEY (Id),
+	CONSTRAINT UK_Name UNIQUE(Name)
+)
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
--- 17 Write a SQL query to find the number of all employees that have manager.
+--18 Write a SQL statement to add a column GroupID to the table Users. Fill some data in 
+--this new column and as well in the Groups table. Write a SQL statement to add a foreign 
+--key constraint between tables Users and Groups tables.
 
-SELECT Count(EmployeeID) [Count Employees with manager] FROM Employees 
-	WHERE ManagerID IS NOT NULL
-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
--- 18 Write a SQL query to find the number of all employees that have no manager.
-
-SELECT Count(EmployeeID) [Count Employees without manager] FROM Employees 
-	WHERE ManagerID IS NULL
-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
--- 19 Write a SQL query to find all departments and the average salary for each of them.
-
-SELECT ROUND(AVG(e.Salary),2) as [Average Salary], 
-	d.Name as Department
-	FROM Employees e 
-		JOIN Departments d
-			ON e.DepartmentID = d.DepartmentID
-GROUP BY e.DepartmentID, d.Name
-ORDER BY [Average Salary]
+ALTER TABLE Users	
+	ADD CONSTRAINT FK_GroupId FOREIGN KEY(GroupId) REFERENCES Groups (Id)
+	ADD GroupId int
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- 20 Write a SQL query to find the count of all employees in each department and for each town.
 
-SELECT COUNT(EmployeeId) as [Count Employees],
-	DepartmentID,
-	t.Name as City
-	FROM Employees e	
-		JOIN Addresses a
-			ON e.AddressID = a.AddressID	
-		JOIN Towns t
-			ON a.TownID = t.TownID
-GROUP BY DepartmentID, t.Name
-Order BY t.Name
+-- 19 
 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- 20
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
