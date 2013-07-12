@@ -37,7 +37,45 @@ GROUP BY DepartmentID, JobTitle
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
+ -- 27 Write a SQL query to display the town where maximal number of employees work.
  
+DECLARE @maxCount int;
+
+Select @maxCount = max(EmployeeCount) from 
+(SELECT COUNT(e.EmployeeID)	as EmployeeCount,
+t.Name
+FROM Employees e
+	JOIN Addresses a
+ON e.AddressID = a.AddressID
+	JOIN Towns t
+On a.TownID = t.TownID
+GROUP BY T.Name) q1
+
+SELECT q2.Name from 
+(SELECT COUNT(e.EmployeeID)	as EmployeeCount,
+	t.Name
+FROM Employees e
+	JOIN Addresses a
+ON e.AddressID = a.AddressID
+	JOIN Towns t
+On a.TownID = t.TownID
+GROUP BY T.Name) q2
+WHERE q2.EmployeeCount = @maxCount
+ ------------------------------------------------------------------------------------------------------------------------------------------------------
  
+ -- 28 Write a SQL query to display the number of managers from each town.
+SELECT COUNT(DISTINCT m.LastName) as [Managers Count],
+	t.Name as Town
+FROM Employees m
+	JOIN Employees e
+	ON m.EmployeeID = e.ManagerID
+	JOIN Addresses a
+	ON m.AddressID = a.AddressID
+	JOIN Towns t
+	ON a.TownID = t.TownID
+GROUP BY t.Name
+ORDER BY [Managers Count] desc
+ 
+ ------------------------------------------------------------------------------------------------------------------------------------------------------
  -- 31 Start a database transaction and drop the table EmployeesProjects. Now how you could restore back the lost table data?
  -- with backup only
