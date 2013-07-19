@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,15 @@ namespace SearchThroughNativeSQL
                 {
                     Console.WriteLine(cust);
                 }
+            }            
+        }
+
+        public class TelerikDbClone : DbContext
+        {
+            public TelerikDbClone()
+                : base("name=testConnection")
+            {
+
             }
         }
     }
