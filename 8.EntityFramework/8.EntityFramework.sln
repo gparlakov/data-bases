@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nortwind.CustomerManupulati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.SearchThroughNativeSQL", "4.SearchThroughNativeSQL\4.SearchThroughNativeSQL.csproj", "{C7E830E7-D10B-4F22-8582-C0C66AAA4C31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6.CopyNorthwind", "6.CopyNorthwind\6.CopyNorthwind.csproj", "{A0921DAB-13A3-4B24-B3E8-B2B46E49CC64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{C7E830E7-D10B-4F22-8582-C0C66AAA4C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7E830E7-D10B-4F22-8582-C0C66AAA4C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7E830E7-D10B-4F22-8582-C0C66AAA4C31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0921DAB-13A3-4B24-B3E8-B2B46E49CC64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0921DAB-13A3-4B24-B3E8-B2B46E49CC64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0921DAB-13A3-4B24-B3E8-B2B46E49CC64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0921DAB-13A3-4B24-B3E8-B2B46E49CC64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
