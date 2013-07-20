@@ -37,6 +37,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -85,6 +86,8 @@
     <Compile Include="Employee.cs">
       <DependentUpon>NortwindDbContex.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeUpgrade.cs" />
+    <Compile Include="EmployeeWithTerritory.cs" />
     <Compile Include="Employee_Sales_by_Country_Result.cs">
       <DependentUpon>NortwindDbContex.tt</DependentUpon>
     </Compile>
